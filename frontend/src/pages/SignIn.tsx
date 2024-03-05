@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import * as apiClient from '../api-client'
+import * as apiClient from '../api-client';
 
 export type SignInFormData = {
     email: string;
     password: string;
 }
 const SignIn = () => {
-    const {register, formState: {errors}} = useForm<SignInFormData>();
+    const {
+        register, 
+        formState: {errors},
+        handleSubmit
+
+
+    } = useForm<SignInFormData>();
     const mutation = useMutation(apiClient.signIn,{
         onSuccess : async () => {
             console.log("user has been signed in");
@@ -16,8 +22,13 @@ const SignIn = () => {
 
         }
     })
+
+    const onSubmit = handleSubmit((data)=>{
+        mutation.mutate(data)
+
+    })
     return (
-        <form className ="flex flex-col gap-5"> 
+        <form className ="flex flex-col gap-5" onSubmit={onSubmit}> 
             <h2 className = "text-3xl font-bold">SignIn</h2>
             <label className = "text-gray-700 text-sm font-bold flex-1">
                     Email
@@ -41,7 +52,14 @@ const SignIn = () => {
                     <span className = "text-red-500">{errors.password.message}</span>
                 )}
             </label>
+            <span>
+                <button 
+                type = "submit"
+                className ="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl">
+                    Login
+                </button>
+            </span>
         </form>
     )
 }
-export default SignIn
+export default SignIn;
