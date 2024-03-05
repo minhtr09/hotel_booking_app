@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Header = () => {
+
     return (
         <div className="bg-blue-800 py-6">
             <div className="container mx-auto flex justify-between">
@@ -8,9 +9,12 @@ const Header = () => {
                     <Link to="/">BookingHotels.com</Link>
                 </span>
                 <span className="flex sapce-x-2">
+                   
                     <Link to="/sign-in" className="flex bg-white items-center text-blue-600 px3 font-bold hover:bg-gray-100 hover:text-green-500">
                         Sign In
                     </Link>
+                    
+                    
                 </span>
             </div>
         </div>
