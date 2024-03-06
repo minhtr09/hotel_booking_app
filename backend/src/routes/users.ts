@@ -19,12 +19,12 @@ router.post(
   async (req: Request, res: Response) => {
     //check unvalid information
     const err = validationResult(req);
+    console.log(err);
     if (!err.isEmpty()) {
       return res.status(400).json({
         message: err.array(),
       });
     }
-
     try {
       let user = await User.findOne({
         email: req.body.email,
@@ -48,7 +48,7 @@ router.post(
         maxAge: 86400000,
       });
 
-      return res.sendStatus(200);
+      return res.status(200).send({ message: "user registered successfully " });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "something went wrong" });

@@ -1,4 +1,4 @@
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from '../api-client';
 import { useAppContext } from "../contexts/AppContext";
@@ -6,45 +6,46 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 export type RegisterFormData = {
-    firstName:string;
-    lastName:string;
-    email:string;
-    password:string;
-    confirmPassword:string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
 }
 
-const Register = () =>{
+const Register = () => {
 
     const {
-        register, 
-        watch, 
-        handleSubmit, 
-        formState:{errors}
+        register,
+        watch,
+        handleSubmit,
+        formState: { errors }
     } = useForm<RegisterFormData>()
 
     const navigate = useNavigate()
 
-    const {showToast} = useAppContext()
-  
+    const { showToast } = useAppContext()
+
     const mutation = useMutation(
-        apiClient.register, 
+        apiClient.register,
         {
             onSuccess: () => {
-                showToast({message: "Registration Success!",  type: "SUCCESS" })
+                showToast({ message: "Registration Success!", type: "SUCCESS" })
                 navigate("/")
             },
 
-            onError: (error:Error)=>{
-                showToast({message: error.message, type: "ERROR"})
+            onError: (error: Error) => {
+                console.log(error);
+                showToast({ message: error.message, type: "ERROR" })
             }
         }
     )
 
-    const onSubmit = handleSubmit((data)=>{mutation.mutate(data)});
-    
+    const onSubmit = handleSubmit((data) => { mutation.mutate(data) });
+
 
     return (
-        
+
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
 
             <h2 className="text-3xl front-bold">Create an Account</h2>
@@ -53,71 +54,73 @@ const Register = () =>{
 
                 <label className="text-gray-700 text-sm font-bold flex-1">
                     Firt Name
-                    <input className="border rounded w-full py-1 px-2 font-normal" 
-                    {...register("firstName", {required: "This field is required"})}></input>
+                    <input className="border rounded w-full py-1 px-2 font-normal"
+                        {...register("firstName", { required: "This field is required" })}></input>
 
-                    {errors.firstName && (<span className = "text-red-500">{errors.firstName.message}</span>)}
+                    {errors.firstName && (<span className="text-red-500">{errors.firstName.message}</span>)}
                 </label>
-                
+
 
                 <label className="text-gray-700 text-sm font-bold flex-1">
                     Last Name
-                    <input className="border rounded w-full py-1 px-2 font-normal" 
-                    {...register("lastName",{required: "This field is required"})}></input>
-                    {errors.lastName && (<span className = "text-red-500">{errors.lastName.message}</span>)}
+                    <input className="border rounded w-full py-1 px-2 font-normal"
+                        {...register("lastName", { required: "This field is required" })}></input>
+                    {errors.lastName && (<span className="text-red-500">{errors.lastName.message}</span>)}
                 </label>
 
             </div>
 
 
             <label className="text-gray-700 text-sm font-bold flex-1">
-                    Email
-                    <input type ="email" className ="border rounded w-full py-1 px-2 font-normal" 
-                    {...register("email",{required: "This field is required"})}></input>
-                    {errors.email && (<span className = "text-red-500">{errors.email.message}</span>)}
+                Email
+                <input type="email" className="border rounded w-full py-1 px-2 font-normal"
+                    {...register("email", { required: "This field is required" })}></input>
+                {errors.email && (<span className="text-red-500">{errors.email.message}</span>)}
             </label>
 
 
             <label className="text-gray-700 text-sm font-bold flex-1">
-                    Password
-                    <input type ="password" className ="border rounded w-full py-1 px-2 font-normal" 
-                    {...register("password",{
-                        required: "This field is required", 
-                        minLength:{
-                            value:6,
+                Password
+                <input type="password" className="border rounded w-full py-1 px-2 font-normal"
+                    {...register("password", {
+                        required: "This field is required",
+                        minLength: {
+                            value: 6,
                             message: "Password must be at least 6 characters",
-                        }})}></input>
-                        {errors.password && (<span className = "text-red-500">{errors.password.message}</span>)}
+                        }
+                    })}></input>
+                {errors.password && (<span className="text-red-500">{errors.password.message}</span>)}
             </label>
 
 
-            <label className = "text-gray-700 text-sm font-bold flex-1">
-                    Confirm password
-                    <input type ="password" className ="border rounded w-full py-1 px-2 font-normal" 
-                    {...register("confirmPassword",{
-                        validate:(val)=>{
-                            if(!val){
+            <label className="text-gray-700 text-sm font-bold flex-1">
+                Confirm password
+                <input type="password" className="border rounded w-full py-1 px-2 font-normal"
+                    {...register("confirmPassword", {
+                        validate: (val) => {
+                            if (!val) {
                                 return "This field is required";
-                            }else if(watch("password") !== val){
+                            } else if (watch("password") !== val) {
                                 return "Your password do no match";
                             }
-                        }})}></input>
-                        {errors.confirmPassword && (<span className = "text-red-500">{errors.confirmPassword.message}</span>)}
+                        }
+                    })}></input>
+                {errors.confirmPassword && (<span className="text-red-500">{errors.confirmPassword.message}</span>)}
             </label>
 
 
             <span className="flex items-center justify-between">
-            <span className="text-sm">
-                Already registed? 
-                <Link className="underline" to="/sign-in"> Sign in here</Link>
+                <span className="text-sm">
+                    Already registed?
+                    <Link className="underline" to="/sign-in"> Sign in here</Link>
                 </span>
-                <button 
-                type = "submit"
-                className ="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl">
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl">
                     Create Account
                 </button>
             </span>
-            
+
         </form>
     );
 };
