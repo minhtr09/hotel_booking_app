@@ -5,8 +5,8 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AppContextProvider } from "./contexts/AppContext.tsx";
 const queryClient = new QueryClient({
-  defaultOptions:{
-    queries:{
+  defaultOptions: {
+    queries: {
       retry: 0,
     }
   }
@@ -14,12 +14,12 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client = {queryClient}>
+    <QueryClientProvider client={queryClient}>
       <AppContextProvider>
-       <App />
+        <App />
       </AppContextProvider>
-      
+
     </QueryClientProvider>
-  
+
   </React.StrictMode>
 );

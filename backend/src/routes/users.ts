@@ -5,6 +5,7 @@ import "dotenv/config";
 import { check, validationResult } from "express-validator";
 const router = express.Router();
 
+//register account
 router.post(
   "/register",
   [
