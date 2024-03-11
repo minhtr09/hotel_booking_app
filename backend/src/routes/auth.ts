@@ -20,6 +20,7 @@ router.post(
     //check unvalid information
     const err = validationResult(req);
     console.log(err);
+    console.log(req.body);
     if (!err.isEmpty()) {
       return res.status(400).json({
         message: err.array(),
