@@ -48,7 +48,7 @@ const Register = () => {
 
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
 
-            <h2 className="text-3xl front-bold">Create an account</h2>
+            <h2 className="text-3xl font-bold">Create an account</h2>
 
             <div className="flex flex-col md:flex-row gap-5">
 
@@ -111,7 +111,7 @@ const Register = () => {
 
             <span className="flex items-center justify-between">
                 <span className="text-sm">
-                    Already registed? <Link className="underline" to="/sign-in">Sign in here</Link>
+                    Already Registered? <Link className="underline" to="/sign-in">Sign in here</Link>
                 </span>
                 <button
                     type="submit"

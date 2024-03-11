@@ -32,7 +32,7 @@ const SignIn = () => {
     })
     return (
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-            <h2 className="text-3xl font-bold">SignIn</h2>
+            <h2 className="text-3xl font-bold">Sign in</h2>
             <label className="text-gray-700 text-sm font-bold flex-1">
                 Email
                 <input type="email" className="border rounded w-full py-1 px-2 font-normal"
