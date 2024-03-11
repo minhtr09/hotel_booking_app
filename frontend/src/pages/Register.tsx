@@ -48,12 +48,12 @@ const Register = () => {
 
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
 
-            <h2 className="text-3xl front-bold">Create an Account</h2>
+            <h2 className="text-3xl front-bold">Create an account</h2>
 
             <div className="flex flex-col md:flex-row gap-5">
 
                 <label className="text-gray-700 text-sm font-bold flex-1">
-                    Firt Name
+                    First Name
                     <input className="border rounded w-full py-1 px-2 font-normal"
                         {...register("firstName", { required: "This field is required" })}></input>
 
@@ -111,13 +111,12 @@ const Register = () => {
 
             <span className="flex items-center justify-between">
                 <span className="text-sm">
-                    Already registed?
-                    <Link className="underline" to="/sign-in"> Sign in here</Link>
+                    Already registed? <Link className="underline" to="/sign-in">Sign in here</Link>
                 </span>
                 <button
                     type="submit"
                     className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl">
-                    Create Account
+                    Create an account
                 </button>
             </span>
 
