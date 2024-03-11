@@ -19,7 +19,6 @@ const upload = multer({
 //add hotels
 router.post(
   "/",
-  verifyToken,
   [
     body("name").notEmpty().withMessage("Name is required"),
     body("city").notEmpty().withMessage("City is required"),
@@ -59,9 +58,23 @@ router.post(
       await hotel.save();
       //4. return a 201 status code
       res.status(201).send(hotel);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Something went wrong" });
+    }
   }
 );
+
+//view my hotel
+router.get("/", verifyToken, async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const hotels = await Hotel.find({ userId: req.userId });
+    res.json(hotels);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching hotel" });
+  }
+});
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {
