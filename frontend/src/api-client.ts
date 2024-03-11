@@ -1,6 +1,6 @@
-import { RegisterFormData } from "./pages/Register.tsx";
-import { SignInFormData } from "./pages/SignIn.tsx";
-//import "dotenv/config";
+import { RegisterFormData } from "./pages/Register";
+import { SignInFormData } from "./pages/SignIn";
+// import "dotenv/config";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
