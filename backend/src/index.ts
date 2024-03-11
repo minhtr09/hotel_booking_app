@@ -4,11 +4,27 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from "cloudinary";
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING as string)
+  .then(() =>
+    console.log(
+      "Connected to database: ",
+      process.env.MONGODB_CONNECTION_STRING
+    )
+  );
 
 const app = express(),
   bodyParser = require("body-parser");
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -21,6 +37,7 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/my-hotels", userRoutes);
 
 app.listen(7000, () => {
   console.log("server listening on port 7000");
