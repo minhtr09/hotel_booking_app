@@ -47,3 +47,7 @@ export const validateToken = async () => {
 
   return response.json();
 };
+
+export const signOut = async () =>{
+  
+}
