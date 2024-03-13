@@ -1,11 +1,12 @@
-import express, { Request, Response, response } from "express";
+import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import User from "../models/user";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
-
+//login
 router.post(
   "/login",
   [
@@ -19,6 +20,7 @@ router.post(
     //check unvalid information
     const err = validationResult(req);
     console.log(err);
+    console.log(req.body);
     if (!err.isEmpty()) {
       return res.status(400).json({
         message: err.array(),
@@ -61,4 +63,15 @@ router.post(
   }
 );
 
+//validate token
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).json({ userId: req.userId });
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+  res.send();
+});
 export default router;
