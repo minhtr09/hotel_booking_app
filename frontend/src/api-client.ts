@@ -51,3 +51,7 @@ export const validateToken = async () => {
 export const signOut = async () =>{
   
 }
+
+export const addMyHotel = async (hotelFormData:FormData) => {
+
+}
