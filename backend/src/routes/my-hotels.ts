@@ -38,10 +38,12 @@ router.post(
       .isArray()
       .withMessage("Facilities are required"),
   ],
+  verifyToken,
   upload.array("imageFiles", 6),
 
   async (req: Request, res: Response) => {
     try {
+      console.log(req.body);
       const imageFiles = req.files as Express.Multer.File[];
       const newHotel: HotelType = req.body;
 
@@ -52,6 +54,7 @@ router.post(
       newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
       newHotel.userId = req.userId;
+      console.log(req.userId);
 
       //3. save the new hotel to database
       const hotel = new Hotel(newHotel);
@@ -67,9 +70,10 @@ router.post(
 
 //view my hotel
 router.get("/", verifyToken, async (req: Request, res: Response) => {
-  console.log(req.body);
   try {
+    console.log(req.userId);
     const hotels = await Hotel.find({ userId: req.userId });
+    console.log(hotels);
     res.json(hotels);
   } catch (error) {
     res.status(500).json({ message: "Error fetching hotel" });
