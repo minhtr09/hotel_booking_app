@@ -9,12 +9,12 @@ export type HotelType = {
   description: string;
   type: string;
   adultCount: number;
-  childConnt: number;
+  childCount: number;
   facilities: string[];
   pricePerNightWeekdays: number;
   pricePerNightWeekends: number;
   imageUrls: string[];
-  startRating: number;
+  starRating: number;
   lastUpdated: Date;
 };
 
@@ -26,11 +26,11 @@ const hotelSchema = new mongoose.Schema<HotelType>({
   description: { type: String, required: true },
   type: { type: String, required: true },
   adultCount: { type: Number, required: true },
-  childConnt: { type: Number, required: true },
+  childCount: { type: Number, required: true },
   facilities: [{ type: String, required: true }],
   pricePerNightWeekdays: { type: Number, required: true },
   pricePerNightWeekends: { type: Number, required: true },
-  startRating: { type: Number, required: true, min: 1, max: 5 },
+  starRating: { type: Number, required: true, min: 1, max: 5 },
   imageUrls: [{ type: String, required: true }],
   lastUpdated: { type: Date, required: true },
 });
