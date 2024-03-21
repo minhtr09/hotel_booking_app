@@ -79,6 +79,16 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error fetching hotel" });
   }
 });
+//edit hotel
+router.get("/:id", verifyToken, async (req: Request, res: Response) => {
+  const id = req.params.id.toString();
+  try {
+    const hotel = await Hotel.find({ _id: id, userId: req.userId });
+    res.json(hotel);
+  } catch (error) {
+    res.status(500).json({ message: "Error: fetching hotel" });
+  }
+});
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {
