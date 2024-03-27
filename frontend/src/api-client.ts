@@ -96,3 +96,7 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
 
   return response.json();
 };
+export function updateMyHotelById(updateMyHotelById: any, arg1: { onSuccess: () => void; onError: () => void; }): { mutate: any; isLoading: any; } {
+    throw new Error("Function not implemented.");
+}
+
