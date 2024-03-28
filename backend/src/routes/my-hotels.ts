@@ -117,7 +117,7 @@ router.put(
       const updatedImageUrls = await uploadImages(files);
 
       hotel.imageUrls = [
-        ..updatedImageUrls, 
+        ...updatedImageUrls, 
         ...(updatedHotel.imageUrls || [])
       ];
 
